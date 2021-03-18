@@ -1,0 +1,32 @@
+{
+    "name": "f2h2h1/yii2-tinymce",
+    "description": "tinymce integration for yii2",
+    "keywords": [
+        "yii2",
+        "widget",
+        "yii2 widget",
+        "tinymce"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "f2h2h1",
+            "email": "mP6iB1hB@outlook.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "yiisoft/yii2": "~2.0.14",
+        "bower-asset/tinymce": "~5.7.0",
+        "mihaildev/yii2-elfinder": "1.4"
+    },
+    "suggest": {
+        "mihaildev/yii2-elfinder": "tinymce can use elfinder as file manager, authors recommend this library, ^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "F2h2h1\\Yii2Tinymce\\": "src/"
+        }
+    }
+}

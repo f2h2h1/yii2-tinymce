@@ -7,7 +7,7 @@
         "yii2 widget",
         "tinymce"
     ],
-    "type": "library",
+    "type": "yii2-extension",
     "license": "MIT",
     "authors": [
         {

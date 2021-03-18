@@ -18,8 +18,7 @@
     "require": {
         "php": ">=7.4.0",
         "yiisoft/yii2": "~2.0.14",
-        "bower-asset/tinymce": "~5.7.0",
-        "mihaildev/yii2-elfinder": "1.4"
+        "bower-asset/tinymce": "~5.7.0"
     },
     "suggest": {
         "mihaildev/yii2-elfinder": "tinymce can use elfinder as file manager, authors recommend this library, ^1.4"

@@ -6,7 +6,7 @@ yii2-tinymce
 
 安装
 ```
-composer require --prefer-dist f2h2h1/yii2-elfinder
+composer require --prefer-dist f2h2h1/yii2-tinymce
 ```
 
 在视图里引用

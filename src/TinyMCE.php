@@ -164,6 +164,9 @@ class TinyMCE extends \yii\base\Widget
         } else {
             $this->options['toolbar'] = self::tinyMCEToolbar($this->options['toolbar']);
         }
+        if (!isset($this->options['relative_urls'])) {
+            $this->options['relative_urls'] = false;
+        }
 
         parent::init();
     }

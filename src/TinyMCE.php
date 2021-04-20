@@ -112,6 +112,33 @@ class TinyMCE extends \yii\base\Widget
     }
 
     /**
+     * return tinymce toolbar
+     *
+     * @param array|null $toolbar
+     * @return string
+     * @see https://www.tiny.cloud/docs/configure/editor-appearance/#toolbar
+     */
+    public static function tinyMCEToolbar($toolbar = null)
+    {
+        if ($toolbar === null) {
+            // undo redo | image | styleselect | bold italic | alignleft aligncenter alignright alignjustify | table 
+            $toolbar = [
+                ['undo', 'redo'],
+                ['image'],
+                ['styleselect'],
+                ['bold', 'italic'],
+                ['alignleft', 'aligncenter', 'alignright', 'alignjustify'],
+                ['table'],
+                ['preview'],
+            ];
+        }
+
+        return join(' | ', array_map(function ($item) {
+                        return join(' ', $item);
+                    }, $toolbar));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function init()
@@ -130,6 +157,12 @@ class TinyMCE extends \yii\base\Widget
         }
         if (empty($this->tagType)) {
             $this->tagType = self::TEXTAREA;
+        }
+
+        if (!isset($this->options['toolbar'])) {
+            $this->options['toolbar'] = self::tinyMCEToolbar();
+        } else {
+            $this->options['toolbar'] = self::tinyMCEToolbar($this->options['toolbar']);
         }
 
         parent::init();

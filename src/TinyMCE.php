@@ -70,43 +70,46 @@ class TinyMCE extends \yii\base\Widget
     /**
      * return tinymce plugins list
      *
+     * @param array|null $plugins
      * @return string
      * @see https://www.tiny.cloud/docs/plugins/opensource/
      */
-    public static function tinyMCEDefaultPlugins()
+    public static function tinyMCEPlugins($plugins = null)
     {
-        $plugins = [
-            'imagetools',
-            'print',
-            'preview',
-            'searchreplace',
-            'autolink',
-            'directionality',
-            'visualblocks',
-            'visualchars',
-            'fullscreen',
-            'image',
-            'link',
-            'media',
-            'codesample',
-            'table',
-            'charmap',
-            'hr',
-            'pagebreak',
-            'nonbreaking',
-            'anchor',
-            'toc',
-            'insertdatetime',
-            'advlist',
-            'lists',
-            'wordcount',
-            'textpattern',
-            'noneditable',
-            'help',
-            'charmap',
-            'emoticons',
-            'code',
-        ];
+        if ($plugins === null) {
+            $plugins = [
+                'print',
+                'preview',
+                'searchreplace',
+                'autolink',
+                'directionality',
+                'visualblocks',
+                'visualchars',
+                'fullscreen',
+                'imagetools',
+                'image',
+                'link',
+                'media',
+                'codesample',
+                'table',
+                'charmap',
+                'hr',
+                'pagebreak',
+                'nonbreaking',
+                'anchor',
+                'toc',
+                'insertdatetime',
+                'advlist',
+                'lists',
+                'wordcount',
+                'textpattern',
+                'noneditable',
+                'help',
+                'charmap',
+                'emoticons',
+                'code',
+            ];
+        }
 
         return join(' ', $plugins);
     }
@@ -159,6 +162,11 @@ class TinyMCE extends \yii\base\Widget
             $this->tagType = self::TEXTAREA;
         }
 
+        if (!isset($this->options['plugins'])) {
+            $this->options['plugins'] = self::tinyMCEPlugins();
+        } else {
+            $this->options['plugins'] = self::tinyMCEPlugins($this->options['plugins']);
+        }
         if (!isset($this->options['toolbar'])) {
             $this->options['toolbar'] = self::tinyMCEToolbar();
         } else {

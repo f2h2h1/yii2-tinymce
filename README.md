@@ -31,7 +31,6 @@ tinymce 可以使用 elfinder 上传图片和文件。作者在开发时使用�
                     'path' => 'public', // 在上传 basePath 下的路径，就是实际的上传路径
                     'name' => 'public', // 图片/文件根目录名称，可随意。
                     'options' => [ // 这里才是 elfinder 的配置，上面几项都是 mihaildev/yii2-elfinder 的配置
-                        'trashHash' => 'l1_XA', // 如果填了这一项，则小部件初始化时的参数 elfinder uploadTargetHash 也要填一样的值
                     ]
                 ],
             ],
@@ -54,9 +53,6 @@ elFinder integrator 来自这个库 [nao-pon/tinymceElfinder](https://github.com
 ```php
 echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     'tagId' => 'tinymceid', // 这是 tinymce 标签的 id
-    'options' => [ // 在这里添加 tinymce 的配置
-        'plugins' => \F2h2h1\Yii2Tinymce\TinyMCE::tinyMCEDefaultPlugins(),
-    ],
 ]);
 ```
 
@@ -109,7 +105,6 @@ echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     ],
     'elfinder' => [ // 在这里添加 elfinder 的配置
         'url' => \yii\helpers\Url::to(['elfinder/connect']),
-        'uploadTargetHash' => 'l1_XA',
         'nodeId' => 'elfinder',
         'customData' => [
             \Yii::$app->request->csrfParam => \Yii::$app->request->csrfToken, // 这是 yii2 的 csrf ，如果禁用了 csrf 可以不加这一项
@@ -135,7 +130,6 @@ echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     ],
     'elfinder' => [ // 在这里添加 elfinder 的配置
         'url' => \yii\helpers\Url::to(['elfinder/connect']),
-        'uploadTargetHash' => 'l1_XA',
         'nodeId' => 'elfinder',
         'customData' => [
             \Yii::$app->request->csrfParam => \Yii::$app->request->csrfToken, // 这是 yii2 的 csrf ，如果禁用了 csrf 可以不加这一项
@@ -159,7 +153,6 @@ $tinymce1 = \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     ],
     'elfinder' => [ // 在这里添加 elfinder 的配置
         'url' => \yii\helpers\Url::to(['elfinder/connect']),
-        'uploadTargetHash' => 'l1_XA',
         'nodeId' => 'elfinder',
         'customData' => [
             \Yii::$app->request->csrfParam => \Yii::$app->request->csrfToken, // 这是 yii2 的 csrf ，如果禁用了 csrf 可以不加这一项
@@ -178,7 +171,6 @@ $tinymce2 = \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     ],
     'elfinder' => [ // 在这里添加 elfinder 的配置
         'url' => \yii\helpers\Url::to(['elfinder/connect']),
-        'uploadTargetHash' => 'l1_XA',
         'nodeId' => 'elfinder',
         'customData' => [
             \Yii::$app->request->csrfParam => \Yii::$app->request->csrfToken, // 这是 yii2 的 csrf ，如果禁用了 csrf 可以不加这一项

@@ -1,12 +1,31 @@
 <?php
+
 namespace F2h2h1\Yii2Tinymce;
 
-class TinyMCE extends \yii\base\Widget
+use Yii;
+use yii\base\Model;
+use yii\base\Widget;
+use yii\helpers\Html;
+
+class TinyMCE extends Widget
 {
     const DIV = 'div';
     const TEXTAREA = 'textarea';
 
     public $tagId = '';
+
+    /**
+     * @var Model the data model that this widget is associated with.
+     */
+    public $model;
+    /**
+     * @var string the model attribute that this widget is associated with.
+     */
+    public $attribute;
+    /**
+     * @var string the input value.
+     */
+    public $value;
 
     /**
      * it should only be div or textarea
@@ -66,6 +85,14 @@ class TinyMCE extends \yii\base\Widget
      * @see https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
      */
     public $elfinder = [];
+
+    /**
+     * @return bool whether this widget is associated with a data model.
+     */
+    protected function hasModel()
+    {
+        return $this->model instanceof Model && $this->attribute !== null;
+    }
 
     /**
      * return tinymce plugins list
@@ -146,11 +173,15 @@ class TinyMCE extends \yii\base\Widget
      */
     public function init()
     {
+        if (!empty($this->tagId)) {
+            $this->setId($this->tagId);
+        }
+
         if (empty($this->tagAttribute['id'])) {
-            $this->tagAttribute['id'] = $this->tagId;
+            $this->tagAttribute['id'] = $this->hasModel() ? Html::getInputId($this->model, $this->attribute) : $this->getId();
         }
         if (empty($this->tagAttribute['name'])) {
-            $this->tagAttribute['name'] = $this->tagAttribute['id'];
+            $this->tagAttribute['name'] = $this->hasModel() ? Html::getInputName($this->model, $this->attribute) : $this->tagAttribute['id'];
         }
         if (!empty($this->tagAttribute['id'])) {
             $this->options['selector'] = '#'.$this->tagAttribute['id'];
@@ -174,6 +205,14 @@ class TinyMCE extends \yii\base\Widget
         }
         if (!isset($this->options['relative_urls'])) {
             $this->options['relative_urls'] = false;
+        }
+
+        if (empty($this->defaultValue) && $this->hasModel()) {
+            // $arr = $this->model->getAttributes([$this->attribute]);
+            // if (isset($arr[$this->attribute])) {
+            //     $this->defaultValue = $arr[$this->attribute];
+            // }
+            $this->defaultValue = $this->value;
         }
 
         parent::init();
@@ -200,9 +239,9 @@ class TinyMCE extends \yii\base\Widget
             if (!empty($this->tagAttribute['name'])) {
                 $tagName = $this->tagAttribute['name'];
             }
-            return \yii\helpers\Html::textArea($tagName, $this->defaultValue, $this->tagAttribute);
+            return Html::textArea($tagName, $this->defaultValue, $this->tagAttribute);
         }
-        return \yii\helpers\Html::tag('div', $this->defaultValue, $this->tagAttribute);
+        return Html::tag('div', $this->defaultValue, $this->tagAttribute);
     }
 
     protected function registerPlugin($view)
@@ -221,7 +260,7 @@ class TinyMCE extends \yii\base\Widget
             if (empty($this->elfinder['url'])) {
                 return 'missing elfinder connector url';
             }
-            list(, $path) = \Yii::$app->assetManager->publish(__DIR__);
+            list(, $path) = Yii::$app->assetManager->publish(__DIR__);
             $view->registerJsFile($path.'/tinymceElfinder.js');
             $init .= sprintf("%s: %s,", 'file_picker_callback', 'mceElf.browser');
             // $init .= sprintf("%s: %s,", 'images_upload_handler', 'mceElf.uploadHandler');

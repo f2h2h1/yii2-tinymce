@@ -182,3 +182,23 @@ $tinymce2 = \F2h2h1\Yii2Tinymce\TinyMCE::widget([
 echo $tinymce1;
 echo $tinymce2;
 ```
+
+例子7 在 ActiveForm 中使用
+```html
+<?php $form = ActiveForm::begin(['options'=>['class'=>'form-horizontal']]); ?>
+<?= $form->field($model, 'content')->widget(\F2h2h1\Yii2Tinymce\TinyMCE::class, [
+        'options' => [
+            'language_url' => '/js/TinyMCE_zh_CN.js',
+            'language' => 'zh_CN',
+        ],
+        'elfinder' => [
+            'url' => \yii\helpers\Url::to(['elfinder/connect']),
+            'nodeId' => 'elfinder',
+            'customData' => [
+                \Yii::$app->request->csrfParam => \Yii::$app->request->csrfToken,
+            ],
+            'lang' => 'zh_CN',
+        ],
+]); ?>
+<?php ActiveForm::end(); ?>
+```

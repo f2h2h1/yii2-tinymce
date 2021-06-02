@@ -1,15 +1,20 @@
 yii2-tinymce
 ================
+
 这是 tinymce 在 yii2 的小部件。可以使用 elfinder 上传图片和文件。
 
 欢迎 issues 和 pull
 
+## 快速开始
+
 安装
+
 ```
 composer require --prefer-dist f2h2h1/yii2-tinymce
 ```
 
 在视图里引用
+
 ```php
 echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     'tagId' => 'tinymceid', // 这是 tinymce 标签的 id
@@ -17,9 +22,11 @@ echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
 ```
 
 ## elfinder
-tinymce 可以使用 elfinder 上传图片和文件。作者在开发时使用的是这个组件 mihaildev/yii2-elfinder
 
-这是 mihaildev/yii2-elfinder 配置的参考
+tinymce 可以使用 elfinder 上传图片和文件。作者在开发时使用的是这个组件 [mihaildev/yii2-elfinder](https://github.com/MihailDev/yii2-elfinder) 下面的例子里和 elfinder 相关的部分都是使用这个组件的
+
+这是 mihaildev/yii2-elfinder 配置的参考，这段配置是加在 config/main.php 或 config/main-loacl.php 里的
+
 ```php
     'controllerMap' => [
         'elfinder' => [
@@ -39,6 +46,7 @@ tinymce 可以使用 elfinder 上传图片和文件。作者在开发时使用�
 ```
 
 需要在视图里引入 elfinder 的依赖
+
 ```php
 \mihaildev\elfinder\Assets::register($this);
 // 如果需要设置中文或其它语言，需要引入这项
@@ -49,14 +57,8 @@ elFinder integrator 来自这个库 [nao-pon/tinymceElfinder](https://github.com
 
 ## 例子
 
-例子1
-```php
-echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
-    'tagId' => 'tinymceid', // 这是 tinymce 标签的 id
-]);
-```
+### 有默认值的
 
-例子2 有默认值的
 ```php
 echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     'tagId' => 'tinymceid', // 这是 tinymce 标签的 id
@@ -64,7 +66,8 @@ echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
 ]);
 ```
 
-例子3 修改 tinymce 的配置
+### 修改 tinymce 的配置
+
 ```php
 echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     'tagId' => 'tinymceid', // 这是 tinymce 标签的 id
@@ -75,7 +78,8 @@ echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
 ]);
 ```
 
-例子4 加上 elfinder
+### 加上 elfinder
+
 ```php
 echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     'tagId' => 'tinymceid', // 这是 tinymce 标签的 id
@@ -94,7 +98,8 @@ echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
 ]);
 ```
 
-例子4 给 tinymce 和 elfinder 加上中文
+### 给 tinymce 和 elfinder 加上中文
+
 ```php
 echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     'tagId' => 'tinymceid', // 这是 tinymce 标签的 id
@@ -114,8 +119,10 @@ echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     'defaultValue' => 'qweasd', // 这是默认值
 ]);
 ```
+> 这个库并不包含汉化文件， tinymce 的汉化文件可以在这里下载 http://tinymce.ax-z.cn/general/localize-your-language.php
 
-例子5 在 form 表单里使用
+### 在 form 表单里使用
+
 ```php
 <form action="example/form" method="post">
 <?= \F2h2h1\Yii2Tinymce\TinyMCE::widget([
@@ -142,7 +149,8 @@ echo \F2h2h1\Yii2Tinymce\TinyMCE::widget([
 // 在后台里这样接收数据 $_POST['tinymcename']
 ```
 
-例子6 多个实例
+### 多个实例
+
 ```php
 $tinymce1 = \F2h2h1\Yii2Tinymce\TinyMCE::widget([
     'tagId' => 'tinymceid1', // 这是 tinymce 标签的 id
@@ -183,8 +191,9 @@ echo $tinymce1;
 echo $tinymce2;
 ```
 
-例子7 在 ActiveForm 中使用
-```html
+### 在 ActiveForm 中使用
+
+```php
 <?php $form = ActiveForm::begin(['options'=>['class'=>'form-horizontal']]); ?>
 <?= $form->field($model, 'content')->widget(\F2h2h1\Yii2Tinymce\TinyMCE::class, [
         'options' => [

@@ -256,6 +256,14 @@ class TinyMCE extends Widget
         foreach ($this->options as $key => $item) {
             $init .= sprintf("%s: '%s',", $key, $item);
         }
+        $init .= <<<EOF
+            content_style: ".ty-float-right { float: right; } .ty-float-left { float: left; }",
+            image_class_list: [
+                { title: 'None', value: '' },
+                { title: 'Left', value: 'ty-float-left' },
+                { title: 'Right', value: 'ty-float-right' }
+            ],
+        EOF;
         if (count($this->elfinder) > 0) {
             if (empty($this->elfinder['url'])) {
                 return 'missing elfinder connector url';
